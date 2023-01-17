@@ -1,0 +1,51 @@
+.topPanel{
+    position: fixed;
+    top: 0;
+    left: 0;
+    /*height: auto;*/
+    height: 60px;
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+    background: peachpuff;
+    font-size: xx-large;
+}
+
+.canvas{
+    background: ghostwhite;
+    position: fixed;
+    left: 0;
+    top: 70px;
+    right: 10px;
+    bottom: 10px;
+    overflow: scroll;
+    padding: 4px;
+}
+.problemDef{
+    background: lightsteelblue;
+    padding: 1%;
+    padding-right: 3%;
+    width: fit-content;
+}
+.fullCode{
+    background: white;
+    padding-left: 10%;
+}
+.code{
+    background: white;
+    padding-left: 7%;
+    width: fit-content;
+}
+.output{
+    background: white;
+    padding-left: 7%;
+    width: fit-content;
+}
+.explanation{
+    background: white;
+    padding-left: 7%;
+}
+.probContainer{
+    border: 1px solid olivedrab;
+    padding: 2px;
+}

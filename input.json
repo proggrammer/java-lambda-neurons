@@ -1,0 +1,56 @@
+{
+  "title": "Java lambda",
+  "explanation": "Lambda Expressions were added in Java 8.\n\nA lambda expression is a short block of code which takes in parameters and returns a value. Lambda expressions are similar to methods, but they do not need a name and they can be implemented right in the body of a method.",
+  "problems": {
+    "01": {
+      "problem": "Sum of All integers from 1 to 100",
+      "code": [
+        "int sum = IntStream.range(1,101).sum()"
+      ],
+      "fullCode": [
+        "import java.util.List;\nimport java.util.stream.Collectors;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n    public static void main(String[] args)  {\n        System.out.println(sum(100));\n    }\n    public static List<Integer> sum(int n)    {\n        return IntStream.range(1,n).mapToObj(i->i).collect(Collectors.toList());\n    }\n}\n"
+      ],
+      "output": [
+        "sum: 1089"
+      ],
+      "explanation": [
+        "IntStream: A sequence of primitive int-valued elements.\nIntStream sum() : returns the sum of elements in this stream."
+      ]
+    },
+    "02": {
+      "problem": "Sum of Square of all integers from 1 to 100",
+      "code": ["int squareSum = IntStream.range(1,n).map(i -> i*i).sum()"],
+      "fullCode": [],
+      "output": [],
+      "explanation": []
+    },
+    "03": {
+      "problem": "Sum of all even integers from 1 to 100",
+      "code": ["int evenSum = IntStream.range(1,n).filter(i -> i%2==0).sum()"],
+      "fullCode": [],
+      "output": [],
+      "explanation": []
+    },
+    "04": {
+      "problem": "Sum of all even integers from 1 to 100",
+      "code": ["int evenSum = IntStream.range(1,n).filter(i -> i%2==0).sum()"],
+      "fullCode": [],
+      "output": [],
+      "explanation": []
+    },
+    "05": {
+      "problem": "Sum of all even integers from 1 to 100",
+      "code": ["int evenSum = IntStream.range(1,n).filter(i -> i%2==0).sum()"],
+      "fullCode": [],
+      "output": [],
+      "explanation": []
+    },
+    "06": {
+      "problem": "Sum of all even integers from 1 to 100",
+      "code": ["int evenSum = IntStream.range(1,n).filter(i -> i%2==0).sum()"],
+      "fullCode": [],
+      "output": [],
+      "explanation": []
+    }
+  }
+}
