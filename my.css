@@ -4,9 +4,10 @@
     left: 0;
     /*height: auto;*/
     height: 60px;
-    width: 100%;
+    width: 99%;
     text-align: left;
     padding: 5px;
+    /*padding-right: 205px;*/
     background: peachpuff;
     font-size: xx-large;
 }
@@ -43,7 +44,7 @@
 }
 .explanation{
     background: white;
-    padding-left: 7%;
+    padding-left: 3%;
 }
 .probContainer{
     border: 1px solid olivedrab;
@@ -63,5 +64,18 @@
 }
 pre.prettyprint {
     width: 100%;
+}
+
+.collapsi:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.collapsi.activ:after{
+    content: "\2212";
+    float: right;
 }
 

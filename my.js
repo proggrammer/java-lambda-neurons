@@ -4,11 +4,11 @@ fetch('input.json')
     .then(data => {
         tableCreate(data);
         PR.prettyPrint();
+        window.allCollapsed = true;
     });
 function tableCreate(data) {
     // window.input = data;
     const keys = Object.keys(data.problems);
-    console.log(keys);
     var oneDone = false;
     for(var i=0; i<keys.length; i++)    {
         let divContainer = document.createElement("div");
@@ -58,13 +58,25 @@ function tableCreate(data) {
         divContent.appendChild(divOp);
 
         let divExp = document.createElement("div");
-        const pElExp = document.createElement("pre")
-        const codeElExp = document.createElement("code")
-        codeElExp.appendChild(document.createTextNode(probData.explanation));
-        pElExp.appendChild(codeElExp);
-        divExp.className = "explanation";
-        divExp.appendChild(pElExp);
-        divContent.appendChild(divExp);
+        //const pElExp = document.createElement("pre")
+        //const codeElExp = document.createElement("code")
+        //codeElExp.appendChild(document.createTextNode(probData.explanation));
+        //pElExp.appendChild(codeElExp);
+        if(probData.explanation[0] != undefined && probData.explanation[0].trim() != "" ) {
+            let ul = document.createElement("ul");
+            console.log("ii" + probData.explanation[0]);
+            let lines = probData.explanation[0].split("\n");
+            lines.forEach(line => {
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(line));
+                ul.appendChild(li);
+            })
+
+            divExp.appendChild(ul);
+            divExp.className = "explanation";
+            //divExp.appendChild(pElExp);
+            divContent.appendChild(divExp);
+        }
         divContainer.appendChild(divContent);
 
         document.getElementById("canvas").appendChild(divContainer);
@@ -82,5 +94,26 @@ function tableCreate(data) {
                 content.style.display = "block";
             }
         });
+    }
+}
+function toggleAll(){
+    window.allCollapsed = !window.allCollapsed;
+    var coll = document.getElementsByClassName("collapsible");
+    var topEl = document.getElementsByClassName("topPanel");
+    if(window.allCollapsed) {
+        topEl[0].classList.remove("activ");
+        for(var i=0; i<coll.length;i++) {
+            coll[i].classList.remove("active");
+            var content = coll[i].nextElementSibling;
+            content.style.display = "none";
+        }
+    }
+    else{
+        topEl[0].classList.add("activ");
+        for(var i=0; i<coll.length;i++) {
+            coll[i].classList.add("active");
+            var content = coll[i].nextElementSibling;
+            content.style.display = "block";
+        }
     }
 }
