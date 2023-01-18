@@ -8,16 +8,33 @@ fetch('input.json')
 function tableCreate(data) {
     // window.input = data;
     const keys = Object.keys(data.problems);
+    console.log(keys);
+    var oneDone = false;
     for(var i=0; i<keys.length; i++)    {
         let divContainer = document.createElement("div");
         divContainer.className = "probContainer";
 
         const probData = data.problems[keys[i]];
         let div = document.createElement("div");
-        div.className = "problemDef";
+        if(!oneDone) {
+            div.className = "problemDef collapsible active";
+        }
+        else
+            div.className = "problemDef collapsible";
         div.appendChild(document.createTextNode(keys[i]+". "+probData.problem))
         divContainer.appendChild(div);
         // divContainer.click()
+
+        let divContent = document.createElement("div");
+        divContent.className = "content";
+
+        if(!oneDone) {
+            divContent.style.display = "block";
+            // divContent.classList.toggle("active");
+            oneDone = true;
+        }
+        else
+            divContent.style.display = "none";
 
         let divCode = document.createElement("div");
         const pElCode = document.createElement("pre")
@@ -28,18 +45,7 @@ function tableCreate(data) {
         pElCode.appendChild(codeElCode);
         divCode.className = "code";
         divCode.appendChild(pElCode);
-        divContainer.appendChild(divCode);
-
-
-        // let divCodeFull = document.createElement("div");
-        // const pElCodeFull = document.createElement("pre")
-        // pElCodeFull.className="prettyprint";
-        // const codeElCodeFull = document.createElement("code")
-        // codeElCodeFull.appendChild(document.createTextNode(probData.fullCode));
-        // pElCodeFull.appendChild(codeElCodeFull);
-        // divCodeFull.className = "fullCode";
-        // divCodeFull.appendChild(pElCodeFull);
-        // divContainer.appendChild(divCodeFull);
+        divContent.appendChild(divCode);
 
         let divOp = document.createElement("div");
         const pElOp = document.createElement("pre")
@@ -49,7 +55,7 @@ function tableCreate(data) {
         pElOp.appendChild(codeElOp);
         divOp.className = "output";
         divOp.appendChild(pElOp);
-        divContainer.appendChild(divOp);
+        divContent.appendChild(divOp);
 
         let divExp = document.createElement("div");
         const pElExp = document.createElement("pre")
@@ -58,8 +64,23 @@ function tableCreate(data) {
         pElExp.appendChild(codeElExp);
         divExp.className = "explanation";
         divExp.appendChild(pElExp);
-        divContainer.appendChild(divExp);
+        divContent.appendChild(divExp);
+        divContainer.appendChild(divContent);
 
         document.getElementById("canvas").appendChild(divContainer);
+    }
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
     }
 }

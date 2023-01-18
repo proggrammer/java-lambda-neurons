@@ -25,7 +25,7 @@
     background: lightsteelblue;
     padding: 1%;
     padding-right: 3%;
-    width: fit-content;
+    width: 96%;
 }
 .fullCode{
     background: white;
@@ -49,3 +49,19 @@
     border: 1px solid olivedrab;
     padding: 2px;
 }
+.collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.collapsible.active:after{
+    content: "\2212";
+    float: right;
+}
+pre.prettyprint {
+    width: 100%;
+}
+
