@@ -118,7 +118,7 @@
       "explanation": [""]
     },
     "12": {
-      "problem": "Being LAZY sometimes unlocks POWER - lets check something till infinity - find the first element satisfying condition without any explicit limit",
+      "problem": "Lazy doesn't fear infinity!",
       "code": ["        OptionalInt get5 = IntStream.iterate(0, i->i+1).filter(i-> {System.out.println(i); return i>=5;}).findFirst();\n        System.out.println(get5);"],
       "fullCode": [],
       "output": ["0\n1\n2\n3\n4\n5\nOptionalInt[5]"],
