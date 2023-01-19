@@ -14,11 +14,25 @@ body{
     font-size: xx-large;
 }
 
+.ad{
+    text-align: left;
+    position: fixed;
+    top: 60px;
+    right: 10%;
+    /*height: auto;*/
+    height: 10px;
+    width: fit-content;
+    /*text-align: left;*/
+    padding: 5px;
+    background: yellowgreen;
+    font-size: x-small;
+}
+
 .canvas{
     background: ghostwhite;
     position: fixed;
     left: 0;
-    top: 70px;
+    top: 80px;
     right: 10px;
     bottom: 10px;
     overflow: scroll;

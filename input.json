@@ -4,17 +4,13 @@
   "problems": {
     "0": {
       "problem": "How are we going to learn? ...mmm... \"by solving problems.\" click on any Light Blue Bars to toggle & read.",
-      "code": [
-        "View code."
-      ],
+      "code": [],
       "fullCode": [
         "import java.util.List;\nimport java.util.stream.Collectors;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n    public static void main(String[] args)  {\n        System.out.println(sum(100));\n    }\n    public static List<Integer> sum(int n)    {\n        return IntStream.range(1,n).mapToObj(i->i).collect(Collectors.toList());\n    }\n}\n"
       ],
-      "output": [
-        "View output."
-      ],
+      "output": [],
       "explanation": [
-        "View Explanations.\nCheck out following examples: Toggle Light Blue Bars below.  \n Click on top panel (Peachpuff colour) to expand and collapse all."
+        "Each Light Blue Bar has a unique problem to discuss, click them to expand/collapse; it has - 1) code. 2) output. 3) explanations.\nCheck out following examples: Toggle Light Blue Bars below.  \n Click on top panel (Peachpuff colour) to expand and collapse all."
       ]
     },
     "1": {
@@ -194,8 +190,8 @@
     },
     "26": {
       "problem": "Some important links",
-      "code": [""],
-      "output": [""],
+      "code": [],
+      "output": [],
       "explanation": ["https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html\nhttps://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html\nhttps://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html"]
     }
   }

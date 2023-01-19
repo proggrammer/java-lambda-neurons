@@ -61,17 +61,18 @@ function tableCreate(data) {
         }
 
         let divExp = document.createElement("div");
-        //const pElExp = document.createElement("pre")
-        //const codeElExp = document.createElement("code")
-        //codeElExp.appendChild(document.createTextNode(probData.explanation));
-        //pElExp.appendChild(codeElExp);
         if(probData.explanation[0] != undefined && probData.explanation[0].trim() != "" ) {
             let ul = document.createElement("ul");
-            console.log("ii" + probData.explanation[0]);
             let lines = probData.explanation[0].split("\n");
             lines.forEach(line => {
                 let li = document.createElement("li");
-                li.appendChild(document.createTextNode(line));
+                if(line.includes("https://")) {
+                    let a = document.createElement("a");
+                    a.innerHTML = "<a href="+line+">"+line+"</a>";
+                    li.appendChild(a);
+                }
+                else
+                    li.appendChild(document.createTextNode(line));
                 ul.appendChild(li);
             })
 
