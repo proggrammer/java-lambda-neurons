@@ -83,15 +83,16 @@ pre.prettyprint {
 }
 
 .collapsi:after {
-    content: '\002B';
+    content: 'Expand All';
     color: red;
     font-weight: bold;
     float: right;
     margin-left: 5px;
+    font-size: small;
 }
 
 .collapsi.activ:after{
-    content: "\2212";
+    content: "Collapse All";
     float: right;
 }
 
