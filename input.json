@@ -19,14 +19,14 @@
         "sum: 5050"
       ],
       "explanation": [
-        "IntStream: A sequence of elements of int (primitive) type.\nsum() : returns the sum of elements in this stream. - 'streams' are basically some wrapper around collections which helps bulk processing and also parallel processing, unlocking power of functional programming - don't worry what it is for now.\n These wrappers are not actually wrappers but kind of conversion of the data into logical plan 'defining the data' - can be visualised as a data pipeline. \n 101 is given instead of 100, as it is exclusive.\n Note: There are no chances of errors/typos except for 1 & 101 - this is also called Declarative way of programming - or Functional programming - meaning - we tell the computer what we want - not how it needs to be calculated.\n Think of it this way - you have rich apis now - i.e. more number of apis - which can help you write robust code. - This is just richer set of apis to help in long run."
+        "IntStream: A sequence of elements of int (primitive) type.\nsum() : returns the sum of elements in this stream. - 'streams' are basically some wrapper around collections which helps bulk processing and also parallel processing, unlocking power of functional programming - don't worry what it is for now.\n These wrappers are not actually wrappers but kind of conversion of the data into logical plan 'defining the data' - can be visualised as a data pipeline. \n 101 is given instead of 100, as it is exclusive.\n Note: There are no chances of errors/typos except for 1 & 101 - this is also called Declarative way of programming - or Functional programming - meaning - we tell the computer what we want - not how it needs to be calculated - giving less chances of human interventions & error.\n Think of it this way - you have rich apis now - i.e. more number of apis - which can help you write robust code. - This is just richer set of apis to help in long run."
       ]
     },
     "2": {
       "problem": "SUM of SQUARES of each integer from 1 to 100.",
       "code": ["int squareSum = IntStream.range(1,101).map(i -> i*i).sum();"],
       "output": ["squareSum: 338350"],
-      "explanation": [".map() takes a function in the form of i->i*i, it is called lambda expression - no names of function but just parameter and the definition.\n You can pass these lambda expressions around, they can be given names and assigned to a variables as well.\n So nothing new in Java 8 as lambda but a better way to write same things, and helps us reduce the error and increase readability if shorter expressions are written."]
+      "explanation": [".map() takes a function in the form of i->i*i, it is called lambda expression - no names of function but just parameters and the definition of the function.\n You can pass these lambda expressions around, they can be given names and assigned to a variables as well.\n So nothing new in Java 8 as lambda but a better way to write same things, and helps us reduce the error and increase readability if shorter expressions are written."]
     },
     "3": {
       "problem": "SUM of ALL EVEN integers from 1 to 100.",
