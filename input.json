@@ -51,7 +51,7 @@
       "problem": "LIST to MAP - for each element as key, and total count as value.",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 1, 2, 1);\nMap<Integer, Long> mapResult = inputList.stream().collect(Collectors.groupingBy(x->x, Collectors.counting()));\nSystem.out.println(mapResult);"],
       "output": ["{1=3, 2=2, 3=1, 4=1}"],
-      "explanation": ["Collectors.groupingBy - this is how we tell the collector to collect - the specifications for reduction or terminal operation - takes two parameter - they are self explanatory - check link at the last point for all Collectors based predefined functions."]
+      "explanation": ["Collectors.groupingBy - this is how we tell the collector to collect - the specifications for reduction or terminal operation - takes two parameters - they are self explanatory - check link at the last point for all Collectors based predefined functions."]
     },
     "7": {
       "problem": "LIST to MAP - for each element as key, and total count as value. - Another way",
@@ -69,7 +69,7 @@
       "problem": "FINDING an element if it exists - can be used with other conditions.",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 6, 7, 8, 6);\nOptional<Integer> result = inputList.stream().filter(i -> i==6).findFirst();\nSystem.out.println(result);"],
       "output": ["Optional[6]"],
-      "explanation": ["There is another api called findAny - they all are reduction/terminal operations; the name of the call itself defines it. Re-search yourself to learn more differences about them."]
+      "explanation": ["There is another api called findAny - they all are reduction/terminal operations; the name of the calls are self-explanatory. first collected vs any of them - in the first case keeping an eye on sequence."]
     },
     "10": {
       "problem": "SUM of ALL integers from 1 to 100. - Another way",
