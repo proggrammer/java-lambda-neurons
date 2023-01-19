@@ -1,4 +1,3 @@
-// window.onload = PR.prettyPrint();
 fetch('input.json')
     .then((response) => response.json())
     .then(data => {
@@ -7,10 +6,10 @@ fetch('input.json')
         window.allCollapsed = true;
     });
 function tableCreate(data) {
-    // window.input = data;
+    let i;
     const keys = Object.keys(data.problems);
-    var oneDone = false;
-    for(var i=0; i<keys.length; i++)    {
+    let oneDone = false;
+    for(i = 0; i<keys.length; i++)    {
         let divContainer = document.createElement("div");
         divContainer.className = "probContainer";
 
@@ -23,14 +22,12 @@ function tableCreate(data) {
             div.className = "problemDef collapsible";
         div.appendChild(document.createTextNode(keys[i]+". "+probData.problem))
         divContainer.appendChild(div);
-        // divContainer.click()
 
         let divContent = document.createElement("div");
         divContent.className = "content";
 
         if(!oneDone) {
             divContent.style.display = "block";
-            // divContent.classList.toggle("active");
             oneDone = true;
         }
         else
@@ -41,7 +38,6 @@ function tableCreate(data) {
             const pElCode = document.createElement("pre")
             pElCode.className = "prettyprint";
             const codeElCode = document.createElement("code")
-            // codeElCode.className = "language-java";
             codeElCode.appendChild(document.createTextNode(probData.code[0]));
             pElCode.appendChild(codeElCode);
             divCode.className = "code";
@@ -78,20 +74,18 @@ function tableCreate(data) {
 
             divExp.appendChild(ul);
             divExp.className = "explanation";
-            //divExp.appendChild(pElExp);
             divContent.appendChild(divExp);
         }
         divContainer.appendChild(divContent);
 
         document.getElementById("canvas").appendChild(divContainer);
     }
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
+    const coll = document.getElementsByClassName("collapsible");
 
     for (i = 0; i < coll.length; i++) {
         coll[i].addEventListener("click", function() {
             this.classList.toggle("active");
-            var content = this.nextElementSibling;
+            const content = this.nextElementSibling;
             if (content.style.display === "block") {
                 content.style.display = "none";
             } else {
@@ -101,22 +95,24 @@ function tableCreate(data) {
     }
 }
 function toggleAll(){
+    let content;
+    let i;
     window.allCollapsed = !window.allCollapsed;
-    var coll = document.getElementsByClassName("collapsible");
-    var topEl = document.getElementsByClassName("topPanel");
+    const coll = document.getElementsByClassName("collapsible");
+    const topEl = document.getElementsByClassName("topPanel");
     if(window.allCollapsed) {
         topEl[0].classList.remove("activ");
-        for(var i=0; i<coll.length;i++) {
+        for(i = 0; i<coll.length; i++) {
             coll[i].classList.remove("active");
-            var content = coll[i].nextElementSibling;
+            content = coll[i].nextElementSibling;
             content.style.display = "none";
         }
     }
     else{
         topEl[0].classList.add("activ");
-        for(var i=0; i<coll.length;i++) {
+        for(i = 0; i<coll.length; i++) {
             coll[i].classList.add("active");
-            var content = coll[i].nextElementSibling;
+            content = coll[i].nextElementSibling;
             content.style.display = "block";
         }
     }
