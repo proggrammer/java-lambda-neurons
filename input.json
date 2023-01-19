@@ -20,31 +20,26 @@
     "1": {
       "problem": "SUM of ALL integers from 1 to 100",
       "code": [
-        "int sum = IntStream.range(1,101).sum()"
-      ],
-      "fullCode": [
-        "import java.util.List;\nimport java.util.stream.Collectors;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n    public static void main(String[] args)  {\n        System.out.println(sum(100));\n    }\n    public static List<Integer> sum(int n)    {\n        return IntStream.range(1,n).mapToObj(i->i).collect(Collectors.toList());\n    }\n}\n"
+        "int sum = IntStream.range(1,101).sum();"
       ],
       "output": [
         "sum: 5050"
       ],
       "explanation": [
-        "IntStream: A sequence of primitive int-valued elements.\nIntStream sum() : returns the sum of elements in this stream."
+        "IntStream: A sequence of primitive int-valued elements.\nIntStream sum() : returns the sum of elements in this stream. - streams are basically some wrapper around collections which helps bulk processing and also parallel processing, unlocking power of functional programming - dont worry what it is for now.\n These wrappers are not actually wrappers but kind of convert the data into logical plan defining the data - can be visualised as a data pipeline. \n 101 is given instead of 100, as it is exclusive.\n Note: There are no chances of errors/typos except for 1 & 101 - this is also called Declarative way of programming - or functional programming - meaning - we tell the computer what we want - not how it needs to be calculated.\n Think of it this way - you have rich apis now - i.e. more number of apis - which can help you write robust code. - This is just richer set of apis to help in long run."
       ]
     },
     "2": {
       "problem": "SUM of SQUARES of each integer from 1 to 100",
       "code": ["int squareSum = IntStream.range(1,101).map(i -> i*i).sum()"],
-      "fullCode": [],
       "output": ["squareSum: 338350"],
-      "explanation": []
+      "explanation": [".map() takes a function in the form of i->i*i, it is called lambda expression - no names of function but just parameter and the definition.\n You can pass these lambda expressions around, they can be given names and assigned to a variables as well.\n So nothing new in Java 8 as lambda but a better way to write same things, and helps us reduce the error and increase readability if shorter expressions are written."]
     },
     "3": {
       "problem": "SUM of ALL EVEN integers from 1 to 100",
       "code": ["int evenSum = IntStream.range(1,101).filter(i -> i%2==0).sum()"],
-      "fullCode": [],
       "output": ["evenSum: 2550"],
-      "explanation": []
+      "explanation": ["Just like map, filter is another such function which takes boolean valued function. \n think these map/filter as logical expressions, it doesnt do anything, it is evaluated if at the end of some terminal operations are called. So we say them lazily evaluated.\nSo let us think all such expressions categorised into intermediate & terminal operations. Intermidiate steps are not called proactively, they are applied when a terminal operation is called on them. \n Now think of any collection based java data, that is first converted into streams, and a chain of intermediate operations are appended on it, which are just logical plan of computation, and then they are collected based on some functions specified in the terminal operations. \n So you cannot put terminal operation twice on a stream - as it can be evaluated once. \n till the time you dont call terminal operation.. sometimes called reduction operations, nothing will be done."]
     },
 
     "4": {
@@ -52,98 +47,98 @@
       "code": ["int[] result = Arrays.asList(1, 2, 3, 4).stream().filter(i -> i%2==0).mapToInt(i->i).toArray();\nSystem.out.println(Arrays.toString(result));"],
       "fullCode": [],
       "output": ["[2, 4]"],
-      "explanation": []
+      "explanation": [".mapToInt(i->i) - just converts Integer-object to primitive type int"]
     },
     "5": {
       "problem": "ARRAY to LIST - filter only even elements.",
       "code": ["int[] inputArray = new int[]{1,2,3,4};\nList<Integer> result = Arrays.stream(inputArray).filter(i -> i%2==0).boxed().collect(Collectors.toList());\nSystem.out.println(result);"],
       "fullCode": [],
       "output": ["[2, 4]"],
-      "explanation": []
+      "explanation": [".boxed() - converts primitive type int to object Integer - inverse of mapToInt."]
     },
     "6": {
       "problem": "LIST to MAP - for each element as key, and total count as value.",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 1, 2, 1);\nMap<Integer, Long> mapResult = inputList.stream().collect(Collectors.groupingBy(x->x, Collectors.counting()));\nSystem.out.println(mapResult);"],
       "fullCode": [],
       "output": ["{1=3, 2=2, 3=1, 4=1}"],
-      "explanation": []
+      "explanation": ["Collectors.groupingBy - this is how we tell the collector to collect - the specifications for reduction or terminal operation - takes two parameter - they are self explanatory - check link at the last point for all Collectors based predefined functions."]
     },
     "7": {
       "problem": "LIST to MAP - for each element as key, and total count as value. - ANOTHER WAY",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 1, 2, 1);\nMap<Integer, Integer> mapResult = inputList.stream().collect(Collectors.toMap(x->x, x->1, (x,y) -> (x+y)));\nSystem.out.println(mapResult);"],
       "fullCode": [],
       "output": ["{1=3, 2=2, 3=1, 4=1}"],
-      "explanation": []
+      "explanation": ["Now see Collectors.toMap, first argument is for the key, second argument is for the value, third argument talks about conflict of the key, i.e. for same keys what should be done - we say it to add them for us."]
     },
     "8": {
       "problem": "Getting subList of a LIST - usage of skip and limit",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 6, 7, 8);\nList<Integer> resultSlicedList = inputList.stream().skip(2).limit(3).collect(Collectors.toList());\nSystem.out.println(resultSlicedList);"],
       "fullCode": [],
       "output": ["[3, 4, 6]"],
-      "explanation": []
+      "explanation": ["skip and limit seems self explanatory - note that they are intermediate steps - intermediate steps mostly identified by their input and output both being streams."]
     },
     "9": {
       "problem": "FINDING an element if it exists - can be used with other conditions",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 6, 7, 8, 6);\nOptional<Integer> result = inputList.stream().filter(i -> i==6).findFirst();\nSystem.out.println(result);"],
       "fullCode": [],
       "output": ["Optional[6]"],
-      "explanation": ["There is another api called findAny, name itself defines it. Re-search yourself to learn more on that."]
+      "explanation": ["There is another api called findAny - they all are reduction/terminal operations; the name of the call itself defines it. Re-search yourself to learn more differences about them."]
     },
     "10": {
       "problem": "SUM of ALL integers from 1 to 100 - Another way",
       "code": ["int result = IntStream.range(1,101).reduce(0, (r,e) -> r+e);\nSystem.out.println(result);"],
       "fullCode": [],
       "output": ["5050"],
-      "explanation": [""]
+      "explanation": ["\n Reduce is most important terminal operation to me - you can do many things with it\n It takes first parameter as the first result - then applies this result with the next element - this is specified as the second parameter."]
     },
     "11": {
       "problem": "SUM of ALL integers from 1 to 100 - Another way - compact one",
       "code": ["int result = IntStream.range(1,101).reduce(0, Integer::sum);\nSystem.out.println(result);"],
       "fullCode": [],
       "output": ["5050"],
-      "explanation": [""]
+      "explanation": ["Method reference is another replacement for lambda expressions - sometimes they make them look your code better."]
     },
     "11": {
       "problem": "It's LAZY",
       "code": ["        int result = IntStream.range(-5,1).map(e -> {\n            System.out.println(e);\n            return 50/e;\n        }).sum();\n        System.out.println(result);"],
       "fullCode": [],
       "output": ["-5\n-4\n-3\n-2\n-1\n0\nException in thread \"main\" java.lang.ArithmeticException: / by zero..."],
-      "explanation": [""]
+      "explanation": ["See it throws run time exception - so it lets you proceed with computation till error is thrown."]
     },
     "12": {
       "problem": "Being LAZY sometimes unlocks POWER",
       "code": ["        OptionalInt result = IntStream.range(-5,1).map(e -> {\n            System.out.println(e);\n            return 50/e;\n        }).filter(r -> r == -25).findFirst();\n        System.out.println(result);"],
       "fullCode": [],
       "output": ["-5\n-4\n-3\n-2\nOptionalInt[-25]"],
-      "explanation": [""]
+      "explanation": ["Evaluation is delayed till the actual computation - so no pre constraints stopping it to go ahead and run the code - like compilers etc."]
     },
     "12": {
       "problem": "Lazy doesn't fear infinity!",
       "code": ["        OptionalInt get5 = IntStream.iterate(0, i->i+1).filter(i-> {System.out.println(i); return i>=5;}).findFirst();\n        System.out.println(get5);"],
       "fullCode": [],
       "output": ["0\n1\n2\n3\n4\n5\nOptionalInt[5]"],
-      "explanation": [""]
+      "explanation": ["Lazy means - specify the iterator - and the actual value is computed and applied when it is required  - if not required they are not evaluated - this can be done with any programming - but the charm is in the way you can write now using lambda!"]
     },
     "13": {
       "problem": "Converting LIST of LIST to LIST - flattening the list",
       "code": ["        List<List<Integer>> list1 = Arrays.asList(Arrays.asList(1,2,3,4,5), Arrays.asList(10,20,30,40,50));\n        List<Integer> result = list1.stream().flatMap(list->list.stream()).collect(Collectors.toList());\n        System.out.println(result);"],
       "fullCode": [],
       "output": ["[1, 2, 3, 4, 5, 10, 20, 30, 40, 50]"],
-      "explanation": [""]
+      "explanation": ["Flatmap - flattens the collections of collections as collection."]
     },
     "14": {
       "problem": "Power of REDUCE - generalised usage - convert LIST to SET",
       "code": ["        List<Integer> list1 = Arrays.asList(1,2,3,4,5,5);\n        Set<Integer> set = list1.stream().map(e -> Collections.singleton(e)).reduce(new HashSet<>(),\n                (partialResult, element) -> Stream.concat(partialResult.stream(), element.stream()).collect(Collectors.toSet())\n        );\n        System.out.println(set);"],
       "fullCode": [],
       "output": ["[1, 2, 3, 4, 5]"],
-      "explanation": [""]
+      "explanation": ["See interesting way to use Reduce \n The way reduce is written, it expects all values (namely first value, map value, merge value) as same datatype - so the elements are converted into sets - so that the result and next element also becomes same data type as the initial value data type."]
     },
     "15": {
       "problem": "Joining - printing list",
       "code": ["        List<Integer> list = Arrays.asList(1,2,3,4,5,5);\n        String listAsString = list.stream().map(e -> e.toString()).collect(Collectors.joining(\", \", \"[\",\"]\"));\n        System.out.println(listAsString);"],
       "fullCode": [],
       "output": ["[1, 2, 3, 4, 5]"],
-      "explanation": [""]
+      "explanation": ["joining - when given one parameter - prefix and suffixes are ignored"]
     },
     "16": {
       "problem": "FINDING MAX in a list",
@@ -157,42 +152,42 @@
       "code": ["        List<Integer> list = Arrays.asList(1,2,3,4,5,5);\n        Optional<Integer> max = list.stream().collect(Collectors.maxBy(Comparator.comparing(i->i)));\n        System.out.println(max);"],
       "fullCode": [],
       "output": ["Optional[5]"],
-      "explanation": ["Here we are using Collectors."]
+      "explanation": ["Here we are using .collect."]
     },
     "18": {
       "problem": "SORT",
       "code": ["        List<Integer> list = Arrays.asList(1,5,3,4,5,2);\n        List<Integer> sorted = list.stream().sorted().collect(Collectors.toList());\n        System.out.println(sorted);"],
       "fullCode": [],
       "output": ["[1, 2, 3, 4, 5, 5]"],
-      "explanation": [""]
+      "explanation": ["sorted is just arranging sequence as expected"]
     },
     "19": {
       "problem": "REVERSE SORT",
       "code": ["        List<Integer> list = Arrays.asList(1,5,3,4,5,2);\n        List<Integer> sorted = list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());\n        System.out.println(sorted);"],
       "fullCode": [],
       "output": ["[5, 5, 4, 3, 2, 1]"],
-      "explanation": [""]
+      "explanation": ["What a nice way of specifying order."]
     },
     "19": {
       "problem": "Let's make it complex - find closest 3 elements for each element in a list (including the element)",
       "code": ["        List<Integer> list = Arrays.asList(-1,-2,0,9,1,5,3,4,5,2);\n        List<List<Integer>> result = list.stream().map(e -> list.stream().sorted(Comparator.comparing(eI -> Math.abs(eI-e))).limit(3).collect(Collectors.toList())).collect(Collectors.toList());\n        System.out.println(result);"],
       "fullCode": [],
       "output": ["[[-1, -2, 0], [-2, -1, 0], [0, -1, 1], [9, 5, 5], [1, 0, 2], [5, 5, 4], [3, 4, 2], [4, 5, 3], [5, 5, 4], [2, 1, 3]]"],
-      "explanation": [""]
+      "explanation": ["Please explain this to me! :) - Hint - eI scope is inside, e scope is outside - note the scope is within the \"()\""]
     },
     "20": {
       "problem": "FILTER a MAP - allow only even keys",
       "code": ["        Map<Integer, Integer> map = Map.ofEntries(entry(1, 1), entry(2, 2), entry(3, 3), entry(4, 4));\n        Map<Integer, Integer> outputMap = map.entrySet().stream().filter(es-> es.getKey()%2==0).collect(Collectors.toMap(x->x.getKey(), x->x.getValue()));\n        System.out.println(outputMap);"],
       "fullCode": [],
       "output": ["{2=2, 4=4}"],
-      "explanation": [""]
+      "explanation": ["We can work on entrySet, we can work on keySet as well, and value can be worked upon also in similar fashion."]
     },
     "21": {
       "problem": "FILTER a MAP - parallel execution - can be applied most of examples here",
       "code": ["        Map<Integer, Integer> map = Map.ofEntries(entry(1, 1), entry(2, 2), entry(3, 3), entry(4, 4));\n        Map<Integer, Integer> outputMap = map.entrySet().stream().parallel().filter(es-> es.getKey()%2==0).collect(Collectors.toMap(x->x.getKey(), x->x.getValue()));\n        System.out.println(outputMap);"],
       "fullCode": [],
       "output": ["{2=2, 4=4}"],
-      "explanation": [""]
+      "explanation": [".parallel() can be called on stream anywhere and it will turn the computation parallel - note there are some operations which ara not parallel hence they cannot get much benefits out of it, sometimes it can be inefficient as well in rare cases."]
     },
     "22": {
       "problem": "Its not fastest always",
@@ -213,7 +208,7 @@
       "code": ["import java.io.IOException;\nimport java.util.OptionalInt;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n    static class WrappedException extends RuntimeException {\n        Throwable cause;\n        WrappedException(Throwable cause) { this.cause = cause; }\n    }\n\n    static WrappedException throwWrapped(Throwable t) {\n        throw new WrappedException(t);\n    }\n\n    public static void main(String[] args) throws IOException{\n            try {\n                OptionalInt r = IntStream.iterate(-5, i -> i + 1).filter(i -> {\n                    try {\n                        return divideIt(i) > 0;\n                    } catch (IOException e) {\n                        throwWrapped(e);\n                    }\n                    return false;\n                }).findFirst();\n                System.out.println(r);\n            } catch (WrappedException we)   {\n                throw (IOException) we.cause;\n            }\n    }\n    public static int divideIt(int i)  throws IOException {\n        if(i==0) throw new IOException();\n        return 1/i;\n    }\n}\n"],
       "fullCode": [],
       "output": ["Exception in thread \"main\" java.io.IOException\n\tat SumNatural.divideIt(SumNatural.java:35)..."],
-      "explanation": [""]
+      "explanation": [" Throwing catched exception from lambda expressions are sometimes required - and this is the standard practices to do it."]
     },
     "25": {
       "problem": "Notes & Best Practices",
