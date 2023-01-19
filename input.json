@@ -3,7 +3,7 @@
   "explanation": "Lambda Expressions were added in Java 8.\n\nA lambda expression is a short block of code which takes in parameters and returns a value. Lambda expressions are similar to methods, but they do not need a name and they can be implemented right in the body of a method.",
   "problems": {
     "0": {
-      "problem": "How are we going to learn? ...mmm... \"by solving problems.\" click on any LightSteelBlue Bars to toggle & read.",
+      "problem": "How are we going to learn? ...mmm... \"by solving problems.\" click on any Light Blue Bars to toggle & read.",
       "code": [
         "View code."
       ],
@@ -14,7 +14,7 @@
         "View output."
       ],
       "explanation": [
-        "View Explanations.\nCheck out following examples: Toggle Light Blue Panels below.  \n Click on top panel (Peachpuff colour) to expand and collapse all."
+        "View Explanations.\nCheck out following examples: Toggle Light Blue Bars below.  \n Click on top panel (Peachpuff colour) to expand and collapse all."
       ]
     },
     "1": {
@@ -187,16 +187,16 @@
       "explanation": [" Throwing catched exception from lambda expressions are sometimes required - and this is the standard practices to do it."]
     },
     "25": {
-      "problem": "Notes & Best Practices",
-      "code": ["Write pure functions - meaning it will only work on input and produce output, doesnt take any global variable or writes anything etc, just maths+input+output. This helps in many ways reduce unexpected errors doe to concurrency and mutable states; this is why lambda expressions sometimes forces you to send final variable if you are sending it from outside of lambda expressions."],
-      "output": [""],
-      "explanation": ["Follow links to know more about Java Lambda."]
+      "problem": "Best Practices",
+      "code": [],
+      "output": [],
+      "explanation": ["Write pure functions - meaning it will only work on input and produce output, doesnt take any global variable or writes anything etc, just maths+input+output. This helps in many ways reduce unexpected errors doe to concurrency and mutable states; this is why lambda expressions sometimes forces you to send final variable if you are sending it from outside of lambda expressions.\n Using immutable variables are always good bet for parallel processing and functional paradigms.\nFollow links to know more about Java Lambda."]
     },
     "26": {
       "problem": "Some important links",
-      "code": ["https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html\nhttps://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html\nhttps://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html"],
+      "code": [""],
       "output": [""],
-      "explanation": ["Follow links to know more about Java Lambda."]
+      "explanation": ["https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html\nhttps://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html\nhttps://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html"]
     }
   }
 }

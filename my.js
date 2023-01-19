@@ -36,26 +36,29 @@ function tableCreate(data) {
         else
             divContent.style.display = "none";
 
-        let divCode = document.createElement("div");
-        const pElCode = document.createElement("pre")
-        pElCode.className="prettyprint";
-        const codeElCode = document.createElement("code")
-        // codeElCode.className = "language-java";
-        codeElCode.appendChild(document.createTextNode(probData.code));
-        pElCode.appendChild(codeElCode);
-        divCode.className = "code";
-        divCode.appendChild(pElCode);
-        divContent.appendChild(divCode);
-
-        let divOp = document.createElement("div");
-        const pElOp = document.createElement("pre")
-        pElOp.className="prettyprint";
-        const codeElOp = document.createElement("code")
-        codeElOp.appendChild(document.createTextNode(probData.output));
-        pElOp.appendChild(codeElOp);
-        divOp.className = "output";
-        divOp.appendChild(pElOp);
-        divContent.appendChild(divOp);
+        if(probData.code.length != 0) {
+            let divCode = document.createElement("div");
+            const pElCode = document.createElement("pre")
+            pElCode.className = "prettyprint";
+            const codeElCode = document.createElement("code")
+            // codeElCode.className = "language-java";
+            codeElCode.appendChild(document.createTextNode(probData.code[0]));
+            pElCode.appendChild(codeElCode);
+            divCode.className = "code";
+            divCode.appendChild(pElCode);
+            divContent.appendChild(divCode);
+        }
+        if(probData.output.length != 0) {
+            let divOp = document.createElement("div");
+            const pElOp = document.createElement("pre")
+            pElOp.className = "prettyprint";
+            const codeElOp = document.createElement("code")
+            codeElOp.appendChild(document.createTextNode(probData.output[0]));
+            pElOp.appendChild(codeElOp);
+            divOp.className = "output";
+            divOp.appendChild(pElOp);
+            divContent.appendChild(divOp);
+        }
 
         let divExp = document.createElement("div");
         //const pElExp = document.createElement("pre")
