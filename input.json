@@ -7,7 +7,7 @@
       "code": [],
       "output": [],
       "explanation": [
-        "Do you deal with collections like array/list/map/set but don't know how to use Lambda Expressions of Java, this minimal page shows its power and leaves you think more in Functional ways\nHow are we going to learn? ...mmm... \"by solving problems.\" click on any Light Blue Bars to toggle & read.\nEach Light Blue Bar has a unique problem to discuss, click them to expand/collapse; it has 3 things - 1) code. 2) output. 3) explanations.\n Click on top panel (Peachpuff colour) to expand and collapse ALL."
+        "Do you deal with collections like array/list/map/set but don't know how to use Lambda Expressions of Java, this minimal page shows its power and leaves you think more in Functional ways\nHow are we going to learn? ...mmm... \"by solving problems.\" click on any Light Blue Bars to toggle & read.\nEach Light Blue Bar has a unique problem to discuss, click them to expand/collapse; it has 3 things - 1) code. 2) output. 3) explanations.\n Click on top panel (Peachpuff colour - containing the title - 'Think λ in Java') to expand and collapse ALL.\nThis is in a public repository - so raise PR if you feel it is not minimal & complete."
       ]
     },
     "1": {
