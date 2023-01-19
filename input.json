@@ -3,11 +3,11 @@
   "explanation": "Lambda Expressions were added in Java 8.\n\nA lambda expression is a short block of code which takes in parameters and returns a value. Lambda expressions are similar to methods, but they do not need a name and they can be implemented right in the body of a method.",
   "problems": {
     "0": {
-      "problem": "The objective of this page is to serve the smallest yet complete document which can make someone expert in using Lambda Expressions in Java.",
+      "problem": "The objective of this page is to serve the smallest yet complete document which can help you start using Lambda Expressions in Java confidently and make you a better Java writer.",
       "code": [],
       "output": [],
       "explanation": [
-        "Do you deal with collections like array/list/map/set but don't know how to use Lambda Expressions in Java, this minimal page shows its power and leaves you think more Functional way\nHow are we going to learn? ... \"by solving problems.\" click on any Light Blue Bars to toggle & read. Click them to expand/collapse; it has 3 things - 1) Code. 2) Output. & 3) Explanations.\n Click on top panel to expand and collapse 'ALL'.\nThis is in a public repository - raise PRs for modification requests for this page if you feel it is not 'minimal & complete'."
+        "Do you deal with collections like array/list/map/set but don't know how to use Lambda Expressions in Java, this minimal page shows its power and leaves you think more in Functional way\nHow are we going to learn? ... \"by solving problems.\" Click on any Light Blue Bars to toggle(expand) & read; it has 3 parts - 1) Code. 2) Output. & 3) Explanations & concepts - so you learn on the way.\n Click on top panel to expand and collapse 'ALL'.\nThis is in a public repository - raise PRs for modification requests for this page if you feel it is not 'minimal & complete'."
       ]
     },
     "1": {
@@ -19,7 +19,7 @@
         "sum: 5050"
       ],
       "explanation": [
-        "IntStream: A sequence of elements of int (primitive) type.\nsum() : returns the sum of elements in this stream. - 'streams' are basically some wrapper around collections which helps bulk processing and also parallel processing, unlocking power of functional programming - dont worry what it is for now.\n These wrappers are not actually wrappers but kind of conversion of the data into logical plan 'defining the data' - can be visualised as a data pipeline. \n 101 is given instead of 100, as it is exclusive.\n Note: There are no chances of errors/typos except for 1 & 101 - this is also called Declarative way of programming - or Functional programming - meaning - we tell the computer what we want - not how it needs to be calculated.\n Think of it this way - you have rich apis now - i.e. more number of apis - which can help you write robust code. - This is just richer set of apis to help in long run."
+        "IntStream: A sequence of elements of int (primitive) type.\nsum() : returns the sum of elements in this stream. - 'streams' are basically some wrapper around collections which helps bulk processing and also parallel processing, unlocking power of functional programming - don't worry what it is for now.\n These wrappers are not actually wrappers but kind of conversion of the data into logical plan 'defining the data' - can be visualised as a data pipeline. \n 101 is given instead of 100, as it is exclusive.\n Note: There are no chances of errors/typos except for 1 & 101 - this is also called Declarative way of programming - or Functional programming - meaning - we tell the computer what we want - not how it needs to be calculated.\n Think of it this way - you have rich apis now - i.e. more number of apis - which can help you write robust code. - This is just richer set of apis to help in long run."
       ]
     },
     "2": {
@@ -32,7 +32,7 @@
       "problem": "SUM of ALL EVEN integers from 1 to 100.",
       "code": ["int evenSum = IntStream.range(1,101).filter(i -> i%2==0).sum();"],
       "output": ["evenSum: 2550"],
-      "explanation": ["Just like map, filter is another such function which takes boolean valued function. \n think these map/filter as logical expressions, it doesnt do anything, it is evaluated if at the end of some terminal operations are called. So we say them lazily evaluated.\nSo let us think all such expressions categorised into intermediate & terminal operations. Intermidiate steps are not called proactively, they are applied when a terminal operation is called on them. \n Now think of any collection based java data, that is first converted into streams, and a chain of intermediate operations are appended on it, which are just logical plan of computation, and then they are collected based on some functions specified in the terminal operations. \n So you cannot put terminal operation twice on a stream - as it can be evaluated once. \n till the time you dont call terminal operation.. sometimes called reduction operations, nothing will be done."]
+      "explanation": ["Just like map, filter is another such function which takes boolean valued function. \n think these map/filter as logical expressions, it doesnt do anything, it is evaluated if at the end of some terminal operations are called. So we say them lazily evaluated.\nSo let us think all such expressions categorised into intermediate & terminal operations. Intermidiate steps are not called proactively, they are applied when a terminal operation is called on them. \n Now think of any collection based java data, that is first converted into streams, and a chain of intermediate operations are appended on it, which are just logical plan of computation, and then they are collected based on some functions specified in the terminal operations. \n So you cannot put terminal operation twice on a stream - as it can be evaluated once. \n till the time you don't call terminal operation.. sometimes called reduction operations, nothing will be done."]
     },
 
     "4": {
