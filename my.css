@@ -46,12 +46,12 @@ body{
 }
 .code{
     background: white;
-    padding-left: 4%;
+    padding-left: 60px;
     width: fit-content;
 }
 .output{
     background: white;
-    padding-left: 4%;
+    padding-left: 60px;
     width: fit-content;
 }
 .explanation{

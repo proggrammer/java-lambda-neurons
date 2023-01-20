@@ -69,7 +69,13 @@ function tableCreate(data) {
             divCodeCode.appendChild(document.createTextNode("Output"))
             divContent.appendChild(divCodeCode);
 
-            divContent.appendChild(divOp);
+            let divContentCode = document.createElement("div");
+            divContentCode.className = "contentcode";
+
+            divContentCode.appendChild(divCodeCode);
+            divContentCode.appendChild(divOp);
+
+            divContent.appendChild(divContentCode);
         }
 
         let divExp = document.createElement("div");
