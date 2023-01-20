@@ -17,15 +17,20 @@ body{
 .ad{
     text-align: left;
     position: fixed;
-    top: 60px;
-    right: 10%;
-    /*height: auto;*/
+    top: 50px;
+    right: 3%;
     height: 10px;
     width: fit-content;
-    /*text-align: left;*/
-    padding: 5px;
-    background: yellowgreen;
     font-size: x-small;
+}
+
+.ad1{
+    float: left;
+    padding: 1px;
+}
+.ad2{
+    float: right;
+    padding: 1px;
 }
 
 .canvas{
