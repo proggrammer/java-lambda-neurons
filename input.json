@@ -19,14 +19,14 @@
         "sum: 5050"
       ],
       "explanation": [
-        "IntStream: A sequence of elements of int (primitive) type.\nsum() : returns the sum of elements in this stream. - 'streams' are basically some wrapper around collections which helps bulk processing & also parallel processing, unlocking power of functional programming - don't worry what it is for now.\n These wrappers are not actually wrappers but kind of conversion of the data into logical plan 'defining the data' - can be visualised as a data pipeline. \n 101 is given instead of 100, as it is exclusive.\n Note: There are no chances of errors/typos except for 1 & 101 - this is also called Declarative way of programming - or Functional programming - meaning - we tell the computer what we want - not how it needs to be calculated - giving less chances of human interventions & error.\n Think of it this way - you have rich apis now - i.e. more number of apis - which can help you write robust code. - This is just richer set of apis to help in long run."
+        "IntStream: A sequence of elements of int (primitive) type.\nsum() : returns the sum of elements in this stream. - 'streams' are basically some wrapper around collections which helps bulk processing & parallel processing, unlocking power of functional programming - don't worry what it is for now.\n These wrappers are not actually wrappers but kind of conversion of the data into logical plan 'defining the data' - can be visualised as a data pipeline. \n 101 is given instead of 100, as it is exclusive.\n Note: There are no chances of errors/typos except for 1 & 101 - this is also called Declarative way of programming - or Functional programming - meaning - we tell the computer what we want - not how it needs to be calculated - giving less chances of human interventions & hence error.\n Think of it this way - you have rich apis now - i.e. more number of apis - which can help you write robust code. - This is just richer set of apis to help in long run."
       ]
     },
     "2": {
       "problem": "SUM of SQUARES of each integer from 1 to 100.",
       "code": ["int squareSum = IntStream.range(1,101).map(i -> i*i).sum();"],
       "output": ["squareSum: 338350"],
-      "explanation": [".map() takes a function in the form of i->i*i, it is called lambda expression - no names of function but just parameters & the definition of the function.\n You can pass these lambda expressions around, they can be given names & assigned to a variables as well.\n So nothing new in Java 8 as lambda but a better way to write same things, & helps us reduce the error & increase readability if shorter expressions are written."]
+      "explanation": [".map() takes a function in the form of i->i*i, it is called lambda expression; Observe that the name for function is not required but just parameters & the definition of the function.\n You can pass these lambda expressions around, they can be given names & assigned to a variables as well - we'll see them later.\n So, no new computation power as lambda expression - but how we are going to express them in easier way is the catch, & helps us reduce the error & increase readability if shorter expressions are written."]
     },
     "3": {
       "problem": "SUM of ALL EVEN integers from 1 to 100.",
@@ -198,12 +198,18 @@
       "explanation": [" Throwing catched exception from lambda expressions are sometimes required - & this is the standard practices to do it."]
     },
     "32": {
+      "problem": "Applying terminal or reduction operation on same stream twice.",
+      "code": ["import java.util.Arrays;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n\n    public static void main(String[] args) {\n        IntStream inputArray = IntStream.range(0, 4);\n        System.out.println(Arrays.toString(inputArray.toArray()));\n        System.out.println(Arrays.toString(inputArray.toArray()));\n    }\n}"],
+      "output": ["[0, 1, 2, 3]\nException in thread \"main\" java.lang.IllegalStateException: stream has already been operated upon or closed\n\tat java.base/java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:246)\n\tat java.base/java.util.stream.IntPipeline.toArray(IntPipeline.java:562)\n\tat TestMain.main(TestMain.java:9)"],
+      "explanation": ["Whenever a terminal operation is called on a stream - the instance of stream is consumed and closed. So, a stream can be collected or reduced only once - terminal operation can be applied only once."]
+    },
+    "33": {
       "problem": "Best Practices.",
       "code": [],
       "output": [],
-      "explanation": ["Write pure functions - meaning it will only work on input & produce output, doesnt take any global variable or writes anything etc, just maths+input+output. This helps in many ways reduce unexpected errors doe to concurrency & mutable states; this is why lambda expressions sometimes forces you to send final variable if you are sending it from outside of lambda expressions.\n Using immutable variables are always good bet for parallel processing & functional paradigms.\nFollow links to know more about Java Lambda."]
+      "explanation": ["Write pure functions - meaning it will only work on input & produce output, doesnt take any global variable or writes anything etc, just maths+input+output. This helps in many ways reduce unexpected errors doe to concurrency & mutable states; this is why lambda expressions sometimes forces you to send final variable if you are sending it from outside of lambda expressions.\n Using immutable variables are always good bet for parallel processing & functional paradigms.\nFollow links to know more about Java Lambda.\nWrite shorter lines of code, don't put everything in one line, one line should define and process one small definition of computation.\nFunction should return and take actual collection but not streams - as it helps in unit testing and also avoids usage of same stream multiple times."]
     },
-    "33": {
+    "34": {
       "problem": "Some important links.",
       "code": [],
       "output": [],
