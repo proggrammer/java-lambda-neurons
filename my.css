@@ -44,23 +44,19 @@ body{
     padding-right: 3%;
     width: 96%;
 }
-.fullCode{
-    background: white;
-    padding-left: 10%;
-}
 .code{
     background: white;
-    padding-left: 7%;
+    padding-left: 4%;
     width: fit-content;
 }
 .output{
     background: white;
-    padding-left: 7%;
+    padding-left: 4%;
     width: fit-content;
 }
 .explanation{
     background: white;
-    padding-left: 3%;
+    padding-left: 0%;
 }
 .probContainer{
     border: 1px solid olivedrab;
@@ -94,5 +90,20 @@ pre.prettyprint {
 .collapsi.activ:after{
     content: "Collapse All";
     float: right;
+}
+.titlecode{
+    float: left;
+    font-family: "Monospaced";
+    font-weight: bold;
+    color: rosybrown;
+    vertical-align: middle;
+    padding-top: 1em;
+    padding-left: 1em;
+    width: 4%;
+    font-size: smaller;
+}
+.content{
+    padding-left: 3%;
+    width: 94%;
 }
 

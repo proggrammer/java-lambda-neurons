@@ -42,7 +42,17 @@ function tableCreate(data) {
             pElCode.appendChild(codeElCode);
             divCode.className = "code";
             divCode.appendChild(pElCode);
-            divContent.appendChild(divCode);
+
+            let divCodeCode = document.createElement("div");
+            divCodeCode.className = "titlecode";
+            divCodeCode.appendChild(document.createTextNode("Code"))
+
+            let divContentCode = document.createElement("div");
+            divContentCode.className = "contentcode";
+
+            divContentCode.appendChild(divCodeCode);
+            divContentCode.appendChild(divCode);
+            divContent.appendChild(divContentCode)
         }
         if(probData.output.length != 0) {
             let divOp = document.createElement("div");
@@ -53,6 +63,12 @@ function tableCreate(data) {
             pElOp.appendChild(codeElOp);
             divOp.className = "output";
             divOp.appendChild(pElOp);
+
+            let divCodeCode = document.createElement("div");
+            divCodeCode.className = "titlecode";
+            divCodeCode.appendChild(document.createTextNode("Output"))
+            divContent.appendChild(divCodeCode);
+
             divContent.appendChild(divOp);
         }
 
