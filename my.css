@@ -22,6 +22,19 @@ body{
     height: 10px;
     width: fit-content;
     font-size: x-small;
+    background: yellowgreen;
+    padding: 4px;
+}
+.footer{
+    text-align: left;
+    position: fixed;
+    right: 3%;
+    height: 10px;
+    bottom: 4px;
+    width: fit-content;
+    font-size: x-small;
+    background: yellowgreen;
+    padding: 2px;
 }
 
 .ad1{
