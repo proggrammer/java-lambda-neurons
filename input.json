@@ -32,7 +32,7 @@
       "problem": "SUM of ALL EVEN integers from 1 to 100.",
       "code": ["int evenSum = IntStream.range(1,101).filter(i -> i%2==0).sum();"],
       "output": ["evenSum: 2550"],
-      "explanation": ["Just like .map(), .filter() is another such function which takes boolean valued functions. \n Think of these .map()/.filter() calls as logical expressions, it doesnt do anything, just make a data pipeline plan of execution, it is executed if at the end of some terminal operations are called - some collect operation is called. Hence, we say them lazily evaluated.\nLet us think all such expressions categorised into intermediate & terminal operations. Intermediate steps are not called proactively, they are applied when a terminal operation is called on them. \n Now, think of any java collection, first converted into streams, & a chain of intermediate operations are appended on it, which are just logical plans of computation, & then they are collected based on some functions specified in the terminal operations - provided with criteria of collection or reduction."]
+      "explanation": ["Just like .map(), .filter() is another such function which takes boolean valued functions. \n Think of these .map()/.filter() calls as logical expressions, it doesn't do anything, just make a data pipeline plan of execution, it is executed if at the end of some terminal operations are called - some collect operation is called. Hence, we say them lazily evaluated.\nLet us think all such expressions categorised into intermediate & terminal operations. Intermediate steps are not called proactively, they are applied when a terminal operation is called on them. \n Now, think of any java collection, first converted into streams, & a chain of intermediate operations are appended on it, which are just logical plans of computation, & then they are collected based on some functions specified in the terminal operations - provided with criteria of collection or reduction."]
     },
 
     "4": {
@@ -69,25 +69,25 @@
       "problem": "FINDING an element if it exists - can be used with other conditions.",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 6, 7, 8, 6);\nOptional<Integer> result = inputList.stream().filter(i -> i==6).findFirst();\nSystem.out.println(result);"],
       "output": ["Optional[6]"],
-      "explanation": ["There is another api called findAny - they all are reduction/terminal operations; the name of the calls are self-explanatory. first collected vs any of them - in the first case keeping an eye on sequence."]
+      "explanation": ["There is another api .findAny() - they all are reduction/terminal operations; the name of the calls are self-explanatory. The first collected element vs any of them - in the first case it needs to maintain the sequence."]
     },
     "10": {
       "problem": "SUM of ALL integers from 1 to 100. - Another way",
       "code": ["int result = IntStream.range(1,101).reduce(0, (r,e) -> r+e);\nSystem.out.println(result);"],
       "output": ["5050"],
-      "explanation": ["Reduce is most important terminal operation to me - you can do many things with it\n It takes first parameter as the first result - then applies this result with the next element - this is specified as the second parameter."]
+      "explanation": [".reduce() is most important terminal operation - you can do many things with it. Now find the analogy with these concepts with map-reduce concept often heard in bulk/big-data processing.\n .reduce() takes first parameter as the initial result without applying any elements in the collection - then apply this result with the next element - this is specified as the second parameter. This is Repeated: get the result from previous computation, and then apply it with the next element. - the last result is the final result."]
     },
     "11": {
       "problem": "SUM of ALL integers from 1 to 100. - Another way - compact one",
       "code": ["int result = IntStream.range(1,101).reduce(0, Integer::sum);\nSystem.out.println(result);"],
       "output": ["5050"],
-      "explanation": ["Method reference is another replacement for lambda expressions - sometimes they make them look your code better."]
+      "explanation": ["Method reference is another replacement for lambda expressions - sometimes they make them look your code cleaner. It is used as ClassName::methodName. - While coding - try these techniques and keep improving."]
     },
     "12": {
       "problem": "It's LAZY",
       "code": ["int result = IntStream.range(-5,1).map(e -> {\n        System.out.println(e);\n        return 50/e;\n}).sum();\nSystem.out.println(result);"],
       "output": ["-5\n-4\n-3\n-2\n-1\n0\nException in thread \"main\" java.lang.ArithmeticException: / by zero..."],
-      "explanation": ["See it throws run time exception - so it lets you proceed with computation till error is thrown."]
+      "explanation": ["See, it throws run time exception - so it lets you proceed with computation till error is thrown.\n 50/e is just a random computation to get 'Divide by 0 exception.'"]
     },
     "13": {
       "problem": "Being LAZY sometimes unlocks POWER.",
@@ -99,25 +99,25 @@
       "problem": "Lazy doesn't fear infinity.",
       "code": ["OptionalInt get5 = IntStream.iterate(0, i->i+1).filter(i-> {System.out.println(i); return i>=5;}).findFirst();\nSystem.out.println(get5);"],
       "output": ["0\n1\n2\n3\n4\n5\nOptionalInt[5]"],
-      "explanation": ["Lazy means - specify the iterator - & the actual value is computed & applied when it is required  - if not required they are not evaluated - this can be done with any programming - but the charm is in the way you can write now using lambda!"]
+      "explanation": ["Lazy means - specify the iterator - the actual value is computed and applied when it is required  - if not required they are not evaluated - this can be done with any standard programming language - but the charm is in the way you can write now using lambda!"]
     },
     "15": {
       "problem": "Converting LIST of LIST to LIST - flattening the list.",
       "code": ["List<List<Integer>> list1 = Arrays.asList(Arrays.asList(1,2,3,4,5), Arrays.asList(10,20,30,40,50));\nList<Integer> result = list1.stream().flatMap(list->list.stream()).collect(Collectors.toList());\nSystem.out.println(result);"],
       "output": ["[1, 2, 3, 4, 5, 10, 20, 30, 40, 50]"],
-      "explanation": ["Flatmap - flattens the collections of collections as collection."]
+      "explanation": [".flatmap() - flattens the collection of collections as a fundamental collection. - look closely it is self explanatory."]
     },
     "16": {
       "problem": "Power of REDUCE - generalised usage - convert LIST to SET.",
       "code": ["List<Integer> list1 = Arrays.asList(1,2,3,4,5,5);\nSet<Integer> set = list1.stream().map(e -> Collections.singleton(e)).reduce(new HashSet<>(),\n        (partialResult, element) -> Stream.concat(partialResult.stream(), element.stream()).collect(Collectors.toSet())\n);\nSystem.out.println(set);"],
       "output": ["[1, 2, 3, 4, 5]"],
-      "explanation": ["See interesting way to use Reduce \n The way reduce is written, it expects all values (namely first value, map value, merge value) as same datatype - so the elements are converted into sets - so that the result & next element also becomes same data type as the initial value data type."]
+      "explanation": ["Reduce is like basic way of reduction, of two objects to one object, sometimes the returned object can be list as well - this is a great abstraction used in reduce part of any coding practices. \n The way reduce is written, it expects all values (namely first value, map value, merge value) as same datatype - so, here, the elements are converted into sets - so that the result & next element also becomes same data type as the initial result data type."]
     },
     "17": {
       "problem": "Joining - printing list.",
       "code": ["List<Integer> list = Arrays.asList(1,2,3,4,5,5);\nString listAsString = list.stream().map(e -> e.toString()).collect(Collectors.joining(\", \", \"[\",\"]\"));\nSystem.out.println(listAsString);"],
       "output": ["[1, 2, 3, 4, 5]"],
-      "explanation": ["joining - when given one parameter - prefix & suffixes are ignored"]
+      "explanation": [".joining() - such predefined functions exist - they are reduction operations helping readability of output - when called with one parameter - prefix & suffixes are ignored."]
     },
     "18": {
       "problem": "FINDING MAX in a list.",
@@ -129,13 +129,13 @@
       "problem": "FINDING MAX in a list. - Another way",
       "code": ["List<Integer> list = Arrays.asList(1,2,3,4,5,5);\nOptional<Integer> max = list.stream().collect(Collectors.maxBy(Comparator.comparing(i->i)));\nSystem.out.println(max);"],
       "output": ["Optional[5]"],
-      "explanation": ["Here we are using .collect."]
+      "explanation": ["Here we are using .collect() for collection or as the terminal/reduction operation. Other such collectors are there, like we have seen example of .max() above."]
     },
     "20": {
       "problem": "SORTing",
       "code": ["List<Integer> list = Arrays.asList(1,5,3,4,5,2);\nList<Integer> sorted = list.stream().sorted().collect(Collectors.toList());\nSystem.out.println(sorted);"],
       "output": ["[1, 2, 3, 4, 5, 5]"],
-      "explanation": ["sorted is just arranging sequence as expected."]
+      "explanation": [".sorting() is self explanatory. Think if .parallel() stream can help here?"]
     },
     "21": {
       "problem": "REVERSE SORTing.",
@@ -147,7 +147,7 @@
       "problem": "Let's make it complex - find closest 3 elements for each element in a list (including the element).",
       "code": ["List<Integer> list = Arrays.asList(-1,-2,0,9,1,5,3,4,5,2);\nList<List<Integer>> result = list.stream().map(e -> list.stream().sorted(Comparator.comparing(eI -> Math.abs(eI-e))).limit(3).collect(Collectors.toList())).collect(Collectors.toList());\nSystem.out.println(result);"],
       "output": ["[[-1, -2, 0], [-2, -1, 0], [0, -1, 1], [9, 5, 5], [1, 0, 2], [5, 5, 4], [3, 4, 2], [4, 5, 3], [5, 5, 4], [2, 1, 3]]"],
-      "explanation": ["Please explain this to me! :) - Hint - eI scope is inside, e scope is outside - note the scope is within the \"()\""]
+      "explanation": ["Please explain this! :) - Hint - eI's scope is inside, e's scope is outside - note the scope is within the \"()\"."]
     },
     "23": {
       "problem": "FILTER a MAP - allow only even keys.",
@@ -159,7 +159,7 @@
       "problem": "FILTER a MAP - parallel execution - can be applied most of examples here.",
       "code": ["Map<Integer, Integer> map = Map.ofEntries(entry(1, 1), entry(2, 2), entry(3, 3), entry(4, 4));\nMap<Integer, Integer> outputMap = map.entrySet().stream().parallel().filter(es-> es.getKey()%2==0).collect(Collectors.toMap(x->x.getKey(), x->x.getValue()));\nSystem.out.println(outputMap);"],
       "output": ["{2=2, 4=4}"],
-      "explanation": [".parallel() can be called on stream anywhere & it will turn the computation parallel - note there are some operations which ara not parallel hence they cannot get much benefits out of it, sometimes it can be inefficient as well in rare cases."]
+      "explanation": [".parallel() can be called on stream anywhere & it will turn the computation parallel - note there are some operations which are not parallel, hence they cannot get much benefit out of it, sometimes it can be inefficient as well in rare cases."]
     },
     "26": {
       "problem": "The First class citizen is function here - you can pass around functions as variables. Check the code:",
@@ -177,37 +177,37 @@
       "problem": "It's not fastest always.",
       "code": ["import java.util.Arrays;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n\n    public static void main(String[] args) {\n         int MAX_VALUE = 10000000;\n        int[] inputArray = IntStream.range(0, MAX_VALUE).toArray();\n        long startTime = System.currentTimeMillis();\n        int sumIter = 0;\n        for(int i=0;i<MAX_VALUE;i++)    {\n            sumIter +=inputArray[i];\n        }\n        System.out.println(\"Iteration time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n\n        startTime = System.currentTimeMillis();\n        int sumSeq = Arrays.stream(inputArray).map(i->((int) Math.sqrt(i))).sum();\n        System.out.println(\"Sequential stream time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n\n        startTime = System.currentTimeMillis();\n        int sumPar = Arrays.stream(inputArray).parallel().map(i->((int) Math.sqrt(i))).sum();\n        System.out.println(\"Parallel stream time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n    }\n}"],
       "output": ["Iteration time taken:6 ms.\nSequential stream time taken:12 ms.\nParallel stream time taken:26 ms."],
-      "explanation": ["Note the expectation is completely reversed - you sometimes prefer iterative approach during basic calculations - but lambda gives your readable code & less error. \n If each operation on element is not quite large - you wont see efficiency for parallel processing. - think of .stream & .parallel as some calls which takes time, you need to think of those overheads whenever time is the constraint."]
+      "explanation": ["Note the expectation is completely reversed - you sometimes prefer iterative approach during basic calculations - but lambda gives your readable code & less error. \n If each operation on each element is not quite large - you won't see efficiency for parallel processing. - think of .stream & .parallel as some calls which takes time, you need to think of those overheads whenever time is the constraint. - note just like .stream(), .parallelStream() also exist."]
     },
     "29": {
       "problem": "Parallel computation. - Lets see what happens if we deal with larger input in the last example.",
       "code": ["    public static void main(String[] args) {\n        int MAX_VALUE = 1000000000;\n        int[] inputArray = IntStream.range(0, MAX_VALUE).toArray();\n        long startTime = System.currentTimeMillis();\n        int sumIter = 0;\n        for(int i=0;i<MAX_VALUE;i++)    {\n            sumIter +=inputArray[i];\n        }\n        System.out.println(\"Iteration time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n\n        startTime = System.currentTimeMillis();\n        int sumSeq = Arrays.stream(inputArray).map(i->((int) Math.sqrt(i))).sum();\n        System.out.println(\"Sequential stream time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n\n        startTime = System.currentTimeMillis();\n        int sumPar = Arrays.stream(inputArray).parallel().map(i->((int) Math.sqrt(i))).sum();\n        System.out.println(\"Parallel stream time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n    }\n}"],
       "output": ["Iteration time taken:1566 ms.\nSequential stream time taken:2030 ms.\nParallel stream time taken:219 ms."],
-      "explanation": ["See how just .parallel() makes things fastest possible\nNote Iterations are faster than sequential streams generally - but then you make your code longer and error prone, lossing possibility of parallel computation without much refactoring.\nNote how we specify - we want to process it concurrently without specifying how it needs to be done. - This is declarative way of programming. - sometimes it might be misleading that the less you have power to control instruction, it weakens the computation power - but this is an example of how abstractions comes up with power rather than restrictions. It gives room for compilers to do optimizations for you."]
+      "explanation": ["See how just .parallel() makes things fastest possible\nNote: Iterations are faster than sequential streams generally - but then you make your code longer and error prone, loosing parallel computation often.\nNote: how we are specifying things - we want to process it concurrently without specifying how it needs to be done. - This is declarative way of programming. - sometimes it might be misleading that the less you have power to control instruction, it weakens the computation power - but this is an example of how abstractions comes up with power rather than restrictions. It gives room for compilers to do optimizations for you."]
     },
     "30": {
       "problem": "Exception is runtime.",
       "code": ["        OptionalInt r = IntStream.iterate(-5, i->i+1).filter(i->1/i>0).findFirst();\n        System.out.println(r);"],
       "output": ["Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n\tat SumNatural.lambda$main$1(SumNatural.java:13)..."],
-      "explanation": ["These are unchecked, runtime exceptions."]
+      "explanation": ["These are unchecked, runtime exceptions. Suppose one of your method is throwing checked exception - which are generally written with method signatures - will not remain checked exception if that method is called from inside Lambda expressions - but sometimes you need to catch that and throw back to the caller - keep reading the next point for the answer."]
     },
     "31": {
       "problem": "Throwing \"catched\" exceptions from INSIDE the LAMBDA expressions.",
       "code": ["import java.io.IOException;\nimport java.util.OptionalInt;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n    static class WrappedException extends RuntimeException {\n        Throwable cause;\n        WrappedException(Throwable cause) { this.cause = cause; }\n    }\n\n    static WrappedException throwWrapped(Throwable t) {\n        throw new WrappedException(t);\n    }\n\n    public static void main(String[] args) throws IOException{\n            try {\n                OptionalInt r = IntStream.iterate(-5, i -> i + 1).filter(i -> {\n                    try {\n                        return divideIt(i) > 0;\n                    } catch (IOException e) {\n                        throwWrapped(e);\n                    }\n                    return false;\n                }).findFirst();\n                System.out.println(r);\n            } catch (WrappedException we)   {\n                throw (IOException) we.cause;\n            }\n    }\n    public static int divideIt(int i)  throws IOException {\n        if(i==0) throw new IOException();\n        return 1/i;\n    }\n}\n"],
       "output": ["Exception in thread \"main\" java.io.IOException\n\tat SumNatural.divideIt(SumNatural.java:35)..."],
-      "explanation": [" Throwing catched exception from lambda expressions are sometimes required - & this is the standard practices to do it."]
+      "explanation": [" Throwing catched exception from lambda expressions are sometimes required. This is the standard practices to do it."]
     },
     "32": {
       "problem": "Applying terminal or reduction operation on same stream twice.",
       "code": ["import java.util.Arrays;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n\n    public static void main(String[] args) {\n        IntStream inputArray = IntStream.range(0, 4);\n        System.out.println(Arrays.toString(inputArray.toArray()));\n        System.out.println(Arrays.toString(inputArray.toArray()));\n    }\n}"],
       "output": ["[0, 1, 2, 3]\nException in thread \"main\" java.lang.IllegalStateException: stream has already been operated upon or closed\n\tat java.base/java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:246)\n\tat java.base/java.util.stream.IntPipeline.toArray(IntPipeline.java:562)\n\tat TestMain.main(TestMain.java:9)"],
-      "explanation": ["Whenever a terminal operation is called on a stream - the instance of stream is consumed and closed. So, a stream can be collected or reduced only once - terminal operation can be applied only once."]
+      "explanation": ["Whenever a terminal operation is called on a stream - the instance of stream is consumed and closed. So, a stream can be collected or reduced only once - terminal operation can be applied only once on a stream."]
     },
     "33": {
       "problem": "Best Practices.",
       "code": [],
       "output": [],
-      "explanation": ["Write pure functions - meaning it will only work on input & produce output, doesnt take any global variable or writes anything etc, just maths+input+output. This helps in many ways reduce unexpected errors doe to concurrency & mutable states; this is why lambda expressions sometimes forces you to send final variable if you are sending it from outside of lambda expressions. \nThink of any system as two parts : 1)Pure Mathematical System without any side effects like read/write/global variables, and 2) IO operations like read write etc. - This can help you use mathematical tools to test the Pure Part of the System.\n Using immutable variables are always good bet for parallel processing & functional paradigms.\nWrite shorter lines of code, don't put everything in one line, one line should define and process one small definition of computation.\nFunction should return and take actual collection but not streams - as it helps in unit testing and also avoids usage of same stream multiple times.\nFollow links to know more about Java Lambda."]
+      "explanation": ["Write pure functions - meaning.. it will only work on input & produce output, doesn't take any global variable or writes anything etc, just maths+input+output. This helps in many ways reduce unexpected errors due to concurrency & mutable states; this is why lambda expressions sometimes forces you to send final variable if you are sending it from outside of lambda expressions. \nThink of any system as two parts : 1) Pure Mathematical System without any side effects like read/write/global variables, and 2) IO operations like read write etc. - This can help you use mathematical tools to test the Pure Part of the System.\n Using immutable variables are always good bet for parallel processing & functional paradigms.\nWrite shorter lines of code, don't put everything in one line, one line should define and process one small definition of computation.\nFunction should return and take actual collection but not streams - as it helps in unit testing and also avoids usage of same stream multiple times - you wont be able to see any value in streams in debugger before collecting it - and if you collect it on debugger - the system will try to collect the same stream again and throw the error.\nFollow links to know more about Java Lambda."]
     },
     "34": {
       "problem": "Some important links.",
@@ -219,7 +219,7 @@
       "problem": "Questions to recap.",
       "code": [],
       "output": [],
-      "explanation": ["a) What is lambda expression?\nb) How it benefits a programmer?\nc) What is Stream?\nd) What is intermediate & terminal operations - how to recognise them?\ne) How to pass functions inside a function? \nf) How to throw checked exception from inside Lambda expressions?\ne) How to change Streams into parallelStreams?\nf) What is method reference and how it enhances writing lambda expressions?\ng) How Lazy evaluation helps in coding?\nh) When to use stream or parallel stream or simple iterations?\nh) What is pure functions?\ni) Why Pure functions are better?\nj)What are immutable and mutable variables?\nk) Why immutable variables are preferred in Lambda or functional paradigm?"]
+      "explanation": ["a) What is lambda expression?\nb) How it benefits a programmer?\nc) What is Stream?\nd) What is intermediate & terminal operations - how to recognise them?\ne) How to pass functions inside a function? \nf) How to throw checked exception from inside Lambda expressions?\ne) How to change Streams into parallelStreams?\nf) What is method reference and how it enhances writing lambda expressions?\ng) How Lazy evaluation helps in coding?\nh) When to use stream or parallel stream or simple iterations?\nh) What is pure functions?\ni) Why Pure functions are better?\nj) What are immutable and mutable variables?\nk) Why immutable variables are preferred in Lambda or functional paradigm?"]
     }
   }
 }
