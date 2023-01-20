@@ -26,13 +26,13 @@
       "problem": "SUM of SQUARES of each integer from 1 to 100.",
       "code": ["int squareSum = IntStream.range(1,101).map(i -> i*i).sum();"],
       "output": ["squareSum: 338350"],
-      "explanation": [".map() takes a function in the form of i->i*i, it is called lambda expression; Observe that the name for function is not required but just parameters & the definition of the function.\n You can pass these lambda expressions around, they can be given names & assigned to a variables as well - we'll see them later.\n So, no new computation power as lambda expression - but how we are going to express them in easier way is the catch, & helps us reduce the error & increase readability if shorter expressions are written."]
+      "explanation": [".map() takes a function in the form of i->i*i, it is called lambda expression; Observe that the name for function is not required but just parameters & the definition of the function.\n You can pass these lambda expressions around, they can be given names & assigned to a variables as well - we'll see them later.\n So, no new computation power has come as lambda expression - but power of expression has enriched; it helps us reduce the error & increase readability if shorter expressions are written."]
     },
     "3": {
       "problem": "SUM of ALL EVEN integers from 1 to 100.",
       "code": ["int evenSum = IntStream.range(1,101).filter(i -> i%2==0).sum();"],
       "output": ["evenSum: 2550"],
-      "explanation": ["Just like map, filter is another such function which takes boolean valued function. \n think these map/filter as logical expressions, it doesnt do anything, it is evaluated if at the end of some terminal operations are called. So we say them lazily evaluated.\nSo let us think all such expressions categorised into intermediate & terminal operations. Intermidiate steps are not called proactively, they are applied when a terminal operation is called on them. \n Now think of any collection based java data, that is first converted into streams, & a chain of intermediate operations are appended on it, which are just logical plan of computation, & then they are collected based on some functions specified in the terminal operations. \n So you cannot put terminal operation twice on a stream - as it can be evaluated once. \n till the time you don't call terminal operation.. sometimes called reduction operations, nothing will be done."]
+      "explanation": ["Just like .map(), .filter() is another such function which takes boolean valued functions. \n Think of these .map()/.filter() calls as logical expressions, it doesnt do anything, just make a data pipeline plan of execution, it is executed if at the end of some terminal operations are called - some collect operation is called. Hence, we say them lazily evaluated.\nLet us think all such expressions categorised into intermediate & terminal operations. Intermediate steps are not called proactively, they are applied when a terminal operation is called on them. \n Now, think of any java collection, first converted into streams, & a chain of intermediate operations are appended on it, which are just logical plans of computation, & then they are collected based on some functions specified in the terminal operations - provided with criteria of collection or reduction."]
     },
 
     "4": {
@@ -48,22 +48,22 @@
       "explanation": [".boxed() - converts primitive type int to object Integer - inverse of mapToInt."]
     },
     "6": {
-      "problem": "LIST to MAP - for each element as key, & total count as value.",
+      "problem": "LIST to MAP - for each element as key, total count as value.",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 1, 2, 1);\nMap<Integer, Long> mapResult = inputList.stream().collect(Collectors.groupingBy(x->x, Collectors.counting()));\nSystem.out.println(mapResult);"],
       "output": ["{1=3, 2=2, 3=1, 4=1}"],
-      "explanation": ["Collectors.groupingBy - this is how we tell the collector to collect - the specifications for reduction or terminal operation - takes two parameters - they are self explanatory - check link at the last point for all Collectors based predefined functions."]
+      "explanation": ["Collectors.groupingBy() - this is how we tell the collector to collect - the specifications for reduction or terminal operation - takes two parameters - they are self explanatory - check link at the last point for all Collectors based predefined functions."]
     },
     "7": {
-      "problem": "LIST to MAP - for each element as key, & total count as value. - Another way",
+      "problem": "LIST to MAP - for each element as key, total count as value. - Another way",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 1, 2, 1);\nMap<Integer, Integer> mapResult = inputList.stream().collect(Collectors.toMap(x->x, x->1, (x,y) -> (x+y)));\nSystem.out.println(mapResult);"],
       "output": ["{1=3, 2=2, 3=1, 4=1}"],
-      "explanation": ["Now see Collectors.toMap, first argument is for the key, second argument is for the value, third argument talks about conflict of the key, i.e. for same keys what should be done - we say it to add them for us."]
+      "explanation": ["Now see, Collectors.toMap(), first argument is for the key, second argument is for the value, third argument talks about conflict of the key, i.e. for same keys what should be done - we say it to add them for us."]
     },
     "8": {
       "problem": "Getting subList of a LIST - usage of skip & limit.",
       "code": ["List<Integer> inputList = Arrays.asList(1,2, 3, 4, 6, 7, 8);\nList<Integer> resultSlicedList = inputList.stream().skip(2).limit(3).collect(Collectors.toList());\nSystem.out.println(resultSlicedList);"],
       "output": ["[3, 4, 6]"],
-      "explanation": ["skip & limit seems self explanatory - note that they are intermediate steps - intermediate steps mostly identified by their input & output both being streams."]
+      "explanation": [".skip() & .limit() are self explanatory - note that they are intermediate steps - intermediate steps mostly identified by their input & output both being streams."]
     },
     "9": {
       "problem": "FINDING an element if it exists - can be used with other conditions.",
@@ -214,6 +214,12 @@
       "code": [],
       "output": [],
       "explanation": ["https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html\nhttps://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html\nhttps://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html"]
+    },
+    "35": {
+      "problem": "Questions to recap.",
+      "code": [],
+      "output": [],
+      "explanation": ["a) What is lambda expression?\nb) How it benefits a programmer?\nc) What is Stream?\nd) What is intermediate & terminal operations - how to recognise them?\ne) How to pass functions inside a function? \nf) How to throw checked exception from inside Lambda expressions?\ne) How to change Streams into parallelStreams?\nf) What is method reference and how it enhances writing lambda expressions?\ng) How Lazy evaluation helps in coding?\nh) When to use stream or parallel stream or simple iterations?\nh) What is pure functions?\ni) Why Pure functions are better?\nj)What are immutable and mutable variables?\nk) Why immutable variables are preferred in Lambda or functional paradigm?"]
     }
   }
 }
