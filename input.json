@@ -171,7 +171,7 @@
       "problem": "Defining custom functions types.",
       "code": ["public class TestMain {\n    @FunctionalInterface\n    static interface CustomFunc {\n        public int applyF(int i);\n    }\n\n    public static void main(String[] args) {\n        CustomFunc f = i ->i*2;\n        System.out.println(f.applyF(3));\n    }\n}"],
       "output": ["6"],
-      "explanation": ["@FunctionalInterface annotation helps ensure we have only one method defined inside the interface, which can be implemented using lambda.\nBecause Java is build over 'object' concept - this is how Java decided to represent functions."]
+      "explanation": ["@FunctionalInterface annotation helps ensure we have only one method defined inside the interface, which can be implemented using lambda.\nBecause Java is build over 'object' concept - this is how Java decided to represent functions.\nYou can take these classes outside - for demo purpose written as inner class."]
     },
     "28": {
       "problem": "It's not fastest always.",
@@ -180,24 +180,30 @@
       "explanation": ["Note the expectation is completely reversed - you sometimes prefer iterative approach during basic calculations - but lambda gives your readable code & less error. \n If each operation on element is not quite large - you wont see efficiency for parallel processing. - think of .stream & .parallel as some calls which takes time, you need to think of those overheads whenever time is the constraint."]
     },
     "29": {
+      "problem": "Parallel computation. - Lets see what happens if we deal with larger input in the last example.",
+      "code": ["    public static void main(String[] args) {\n        int MAX_VALUE = 1000000000;\n        int[] inputArray = IntStream.range(0, MAX_VALUE).toArray();\n        long startTime = System.currentTimeMillis();\n        int sumIter = 0;\n        for(int i=0;i<MAX_VALUE;i++)    {\n            sumIter +=inputArray[i];\n        }\n        System.out.println(\"Iteration time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n\n        startTime = System.currentTimeMillis();\n        int sumSeq = Arrays.stream(inputArray).map(i->((int) Math.sqrt(i))).sum();\n        System.out.println(\"Sequential stream time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n\n        startTime = System.currentTimeMillis();\n        int sumPar = Arrays.stream(inputArray).parallel().map(i->((int) Math.sqrt(i))).sum();\n        System.out.println(\"Parallel stream time taken:\"+ (System.currentTimeMillis() - startTime)+\" ms.\");\n    }\n}"],
+      "output": ["Iteration time taken:1566 ms.\nSequential stream time taken:2030 ms.\nParallel stream time taken:219 ms."],
+      "explanation": ["See how just .parallel() makes things fastest possible\nNote Iterations are faster than sequential streams generally - but then you make your code longer and error prone, lossing possibility of parallel computation without much refactoring.\nNote how we specify - we want to process it concurrently without specifying how it needs to be done. - This is declarative way of programming. - sometimes it might be misleading that the less you have power to control instruction, it weakens the computation power - but this is an example of how abstractions comes up with power rather than restrictions. It gives room for compilers to do optimizations for you."]
+    },
+    "30": {
       "problem": "Exception is runtime.",
       "code": ["        OptionalInt r = IntStream.iterate(-5, i->i+1).filter(i->1/i>0).findFirst();\n        System.out.println(r);"],
       "output": ["Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n\tat SumNatural.lambda$main$1(SumNatural.java:13)..."],
       "explanation": ["These are unchecked, runtime exceptions."]
     },
-    "30": {
+    "31": {
       "problem": "Throwing \"catched\" exceptions from INSIDE the LAMBDA expressions.",
       "code": ["import java.io.IOException;\nimport java.util.OptionalInt;\nimport java.util.stream.IntStream;\n\npublic class TestMain {\n    static class WrappedException extends RuntimeException {\n        Throwable cause;\n        WrappedException(Throwable cause) { this.cause = cause; }\n    }\n\n    static WrappedException throwWrapped(Throwable t) {\n        throw new WrappedException(t);\n    }\n\n    public static void main(String[] args) throws IOException{\n            try {\n                OptionalInt r = IntStream.iterate(-5, i -> i + 1).filter(i -> {\n                    try {\n                        return divideIt(i) > 0;\n                    } catch (IOException e) {\n                        throwWrapped(e);\n                    }\n                    return false;\n                }).findFirst();\n                System.out.println(r);\n            } catch (WrappedException we)   {\n                throw (IOException) we.cause;\n            }\n    }\n    public static int divideIt(int i)  throws IOException {\n        if(i==0) throw new IOException();\n        return 1/i;\n    }\n}\n"],
       "output": ["Exception in thread \"main\" java.io.IOException\n\tat SumNatural.divideIt(SumNatural.java:35)..."],
       "explanation": [" Throwing catched exception from lambda expressions are sometimes required - & this is the standard practices to do it."]
     },
-    "31": {
+    "32": {
       "problem": "Best Practices.",
       "code": [],
       "output": [],
       "explanation": ["Write pure functions - meaning it will only work on input & produce output, doesnt take any global variable or writes anything etc, just maths+input+output. This helps in many ways reduce unexpected errors doe to concurrency & mutable states; this is why lambda expressions sometimes forces you to send final variable if you are sending it from outside of lambda expressions.\n Using immutable variables are always good bet for parallel processing & functional paradigms.\nFollow links to know more about Java Lambda."]
     },
-    "32": {
+    "33": {
       "problem": "Some important links.",
       "code": [],
       "output": [],
